@@ -1,14 +1,13 @@
 import React from 'react';
 import Goblin from './Goblin';
 
-export default function GoblinList({ allGoblins }) {
+export default function GoblinList({ goblins }) {
   return (
     <div className='goblin-list quarter'>
-      {/* map over your goblins and render out a Goblin component for each goblin. You've seen this before. The only difference here is that you need to pass handleDeleteGoblin (a prop that is a function), as well */}
       {
-        allGoblins.map((goblin, i) => {
-          <Goblin key={goblin + i} goblin={goblin}/>;
-        })
+        goblins.map((goblin, i) =>
+          <Goblin key={goblin + i} goblin={goblin}/>
+        )
       }
     </div>
   );

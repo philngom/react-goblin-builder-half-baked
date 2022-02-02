@@ -24,6 +24,7 @@ function App() {
 
     // on submit, make a new goblin object with a random id, a name that comes from the form state, an hp that comes from the form state, and a color that comes from the form state
     const newGoblin = {
+      id: `${goblinFormName}${goblinFormHP}${goblinFormColor}`,
       name: goblinFormName,
       hp: goblinFormHP,
       color: goblinFormColor
@@ -36,7 +37,6 @@ function App() {
     setGoblinFormName('');
     setGoblinFormHP(1);
     setGoblinFormColor('');
-    console.log(allGoblins);
   }
 
   function handleDeleteGoblin(id) {
