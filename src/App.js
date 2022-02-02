@@ -16,7 +16,7 @@ function App() {
   const [allGoblins, setAllGoblins] = useState([]);
   const [goblinFormName, setGoblinFormName] = useState('');
   const [goblinFormHP, setGoblinFormHP] = useState('');
-  const [goblinFormColor, setGoblinFormColor] = useState('');
+  const [goblinFormColor, setGoblinFormColor] = useState('green');
 
 
   function submitGoblin(e) {
@@ -40,11 +40,12 @@ function App() {
   }
 
   function handleDeleteGoblin(id) {
-    // find the index of the goblin in allGoblins with this id
 
-    // use splice to delete the goblin object at this index
+    const index = allGoblins.findIndex(goblin => goblin.id === id);
 
-    // update the allGoblins array immutably to this new, smaller array
+    allGoblins.splice(index, 1);
+
+    setAllGoblins([...allGoblins]);
   }
 
   function handleFilterGoblins(search) {
