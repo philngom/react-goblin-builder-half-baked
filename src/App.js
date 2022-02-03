@@ -14,15 +14,15 @@ function App() {
       goblinFormColor, which is how we track the user input for the current color of the goblin in the form
 */
   const [allGoblins, setAllGoblins] = useState([]);
+  const [filteredGoblins, setFilteredGoblins] = useState([]);
   const [goblinFormName, setGoblinFormName] = useState('');
   const [goblinFormHP, setGoblinFormHP] = useState('');
-  const [goblinFormColor, setGoblinFormColor] = useState('green');
+  const [goblinFormColor, setGoblinFormColor] = useState('');
 
 
   function submitGoblin(e) {
     e.preventDefault();
 
-    // on submit, make a new goblin object with a random id, a name that comes from the form state, an hp that comes from the form state, and a color that comes from the form state
     const newGoblin = {
       id: `${goblinFormName}${goblinFormHP}${goblinFormColor}`,
       name: goblinFormName,
@@ -35,7 +35,7 @@ function App() {
 
     // clear out the goblin form state items by setting them to empty strings. This will cause the form to reset in the UI.
     setGoblinFormName('');
-    setGoblinFormHP(1);
+    setGoblinFormHP('');
     setGoblinFormColor('');
   }
 
@@ -49,10 +49,10 @@ function App() {
   }
 
   function handleFilterGoblins(search) {
-    // use the filter method to get an array of goblins whose name includes this search argument
 
-    // if there is a search argument, set the filtered goblins to the filtered goblins
-    // if the search argument is undefined, set the filtered goblins in state to just be the array of all goblins
+    const filteredResult = allGoblins.filter(goblin => goblin.name.includes(search));
+
+    setFilteredGoblins(filteredResult);
   }
 
 
@@ -60,10 +60,8 @@ function App() {
     <div className="App">
       <div className='current-goblin quarter'>
         <Goblin goblin={{
-          /*
-            use the goblin form state to make a goblin object and to display it.
-            This will let the user see the current form state
-          */
+          name: goblinFormName,
+          color: goblinFormColor
         }}/>
       </div>
       <div className='goblin-filter quarter'>
@@ -77,7 +75,8 @@ function App() {
         setGoblinFormHP={setGoblinFormHP}
       />
       <GoblinList
-        goblins={ allGoblins } // this takes in an array of goblins. If the filteredGoblins has a length, use that array. Otherwise, use the allGoblins array
+        goblins={
+          filteredGoblins.length ? filteredGoblins : allGoblins } // this takes in an array of goblins. If the filteredGoblins has a length, use that array. Otherwise, use the allGoblins array
         handleDeleteGoblin={handleDeleteGoblin} // note that the goblin list has access to the ability to delete
       />
     </div>
