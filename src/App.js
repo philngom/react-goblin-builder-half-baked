@@ -2,7 +2,7 @@ import './App.css';
 import GoblinForm from './GoblinForm';
 import GoblinList from './GoblinList';
 import Goblin from './Goblin';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function App() {
   const [allGoblins, setAllGoblins] = useState([]);
