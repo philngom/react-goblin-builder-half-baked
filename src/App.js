@@ -2,7 +2,7 @@ import './App.css';
 import GoblinForm from './GoblinForm';
 import GoblinList from './GoblinList';
 import Goblin from './Goblin';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [allGoblins, setAllGoblins] = useState([]);
@@ -10,7 +10,7 @@ function App() {
   const [goblinFormName, setGoblinFormName] = useState('');
   const [goblinFormHP, setGoblinFormHP] = useState('');
   const [goblinFormColor, setGoblinFormColor] = useState('');
-  const [query, setQuery] = useState('');
+  // const [query, setQuery] = useState('');
 
 
   function submitGoblin(e) {
@@ -31,7 +31,6 @@ function App() {
   }
 
   function handleDeleteGoblin(id) {
-    console.log('in delete');
 
     if (filteredGoblins.length) {
       const index = filteredGoblins.findIndex(goblin => goblin.id === id);
@@ -49,7 +48,7 @@ function App() {
   }
 
   function handleFilterGoblins(query) {
-    setQuery(query);
+    // setQuery(query);
     const filteredResult = allGoblins.filter(goblin => goblin.name.includes(query));
 
     setFilteredGoblins(filteredResult);
@@ -75,8 +74,8 @@ function App() {
       />
       <GoblinList
         goblins={
-          filteredGoblins.length ? filteredGoblins : allGoblins } // this takes in an array of goblins. If the filteredGoblins has a length, use that array. Otherwise, use the allGoblins array
-        handleDeleteGoblin={handleDeleteGoblin} // note that the goblin list has access to the ability to delete
+          filteredGoblins.length ? filteredGoblins : allGoblins }
+        handleDeleteGoblin={handleDeleteGoblin}
       />
     </div>
   );
