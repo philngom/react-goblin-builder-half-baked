@@ -31,6 +31,15 @@ function App() {
   }
 
   function handleDeleteGoblin(id) {
+    console.log('in delete');
+
+    if (filteredGoblins.length) {
+      const index = filteredGoblins.findIndex(goblin => goblin.id === id);
+
+      filteredGoblins.splice(index, 1);
+
+      setFilteredGoblins([...filteredGoblins]);
+    }
 
     const index = allGoblins.findIndex(goblin => goblin.id === id);
 
