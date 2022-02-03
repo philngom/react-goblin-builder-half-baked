@@ -5,19 +5,12 @@ import Goblin from './Goblin';
 import { useState } from 'react';
 
 function App() {
-  /*
-    track:
-      allGoblins, an array of all goblins
-      filteredGoblins, a second array of goblins: this one is the filtered version of the above allGoblins array
-      goblinFormName, which is how we track the user input for the current name of the goblin in the form
-      goblinFormHP, which is how we track the user input for the current HP of the goblin in the form
-      goblinFormColor, which is how we track the user input for the current color of the goblin in the form
-*/
   const [allGoblins, setAllGoblins] = useState([]);
   const [filteredGoblins, setFilteredGoblins] = useState([]);
   const [goblinFormName, setGoblinFormName] = useState('');
   const [goblinFormHP, setGoblinFormHP] = useState('');
   const [goblinFormColor, setGoblinFormColor] = useState('');
+  const [query, setQuery] = useState('');
 
 
   function submitGoblin(e) {
@@ -30,10 +23,8 @@ function App() {
       color: goblinFormColor
     };
 
-    // update the allGoblins array. Add the new goblin to the allGoblins array immutably.
     setAllGoblins([...allGoblins, newGoblin]);
 
-    // clear out the goblin form state items by setting them to empty strings. This will cause the form to reset in the UI.
     setGoblinFormName('');
     setGoblinFormHP('');
     setGoblinFormColor('');
@@ -48,9 +39,9 @@ function App() {
     setAllGoblins([...allGoblins]);
   }
 
-  function handleFilterGoblins(search) {
-
-    const filteredResult = allGoblins.filter(goblin => goblin.name.includes(search));
+  function handleFilterGoblins(query) {
+    setQuery(query);
+    const filteredResult = allGoblins.filter(goblin => goblin.name.includes(query));
 
     setFilteredGoblins(filteredResult);
   }
@@ -66,7 +57,6 @@ function App() {
       </div>
       <div className='goblin-filter quarter'>
         Filter Goblins
-        {/* note that handleFilterGoblins is defined upstairs. This is where the allGoblins array gets filtered */}
         <input onChange={(e) => handleFilterGoblins(e.target.value)} />
       </div>
       <GoblinForm
